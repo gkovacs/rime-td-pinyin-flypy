@@ -20,9 +20,15 @@ switches:
     reset: 0
     states: [ 中文, 西文 ]
   - name: full_shape
+    reset: 0
     states: [ 半角, 全角 ]
-  - name: simplification
-    states: [ 漢字, 汉字 ]
+  #- name: simplification
+  #  states: [ 漢字, 汉字 ]
+  - options: [zh_simp, zh_tw ]
+    reset: 0
+    states:
+      - 汉字
+      - 漢字
   - name: ascii_punct
     states: [ 。，, ．， ]
 
@@ -48,11 +54,12 @@ engine:
     - script_translator
   filters:
     #- reverse_lookup_filter
-    - simplifier
+    - simplifier@zh_simp
+    - simplifier@zh_tw
     - uniquifier
 
 speller:
-  alphabet: 'zyxwvutsrqponmlkjihgfedcba-;/<,>\'
+  alphabet: 'zyxwvutsrqponmlkjihgfedcba;,./'
   initials: zyxwvutsrqponmlkjihgfedcba
   delimiter: " '"
   algebra:
@@ -86,12 +93,9 @@ speller:
     - xform/ui([0-5])$/V$1/
     - xform/in([0-5])$/B$1/
     - xlit/QWRTYUIOPSDFGHJKLZXCVBNM/qwrtyuiopsdfghjklzxcvbnm/
-    - abbrev/^(.).+$/$1/
+    #- abbrev/^(.).+$/$1/
     - derive/^([a-z]+)[0-5]$/$1/
-    - 'xlit 1234 -/<\'
-    - 'derive/^(.*)-$/$1;/'
-    - 'derive/^(.*)<$/$1,/'
-    - 'derive/^(.*)\\$/$1>/'
+    - 'xlit 1234 ;/,.'
 
 translator:
   dictionary: terra_pinyin
@@ -132,62 +136,132 @@ translator:
     - xform/([nl])ue/$1üe/
     - xform/([jqxy])v/$1u/
     - xform/eh/ê/
-    - 'xform ([aeiou])(ng?|r)([-;/<,>\\]) $1$3$2'
-    - 'xform ([aeo])([iuo])([-;/<,>\\]) $1$3$2'
-    - 'xform a[-;] ā'
+    - 'xform ([aeiou])(ng?|r)([;/,\.]) $1$3$2'
+    - 'xform ([aeo])([iuo])([;/,\.]) $1$3$2'
+    - 'xform a; ā'
     - 'xform a/ á'
-    - 'xform a[<,] ǎ'
-    - 'xform a[>\\] à'
-    - 'xform e[-;] ē'
+    - 'xform a, ǎ'
+    - 'xform a\. à'
+    - 'xform e; ē'
     - 'xform e/ é'
-    - 'xform e[<,] ě'
-    - 'xform e[>\\] è'
-    - 'xform o[-;] ō'
+    - 'xform e, ě'
+    - 'xform e\. è'
+    - 'xform o; ō'
     - 'xform o/ ó'
-    - 'xform o[<,] ǒ'
-    - 'xform o[>\\] ò'
-    - 'xform i[-;] ī'
+    - 'xform o, ǒ'
+    - 'xform o\. ò'
+    - 'xform i; ī'
     - 'xform i/ í'
-    - 'xform i[<,] ǐ'
-    - 'xform i[>\\] ì'
-    - 'xform u[-;] ū'
+    - 'xform i, ǐ'
+    - 'xform i\. ì'
+    - 'xform u; ū'
     - 'xform u/ ú'
-    - 'xform u[<,] ǔ'
-    - 'xform u[>\\] ù'
-    - 'xform ü[-;] ǖ'
+    - 'xform u, ǔ'
+    - 'xform u\. ù'
+    - 'xform ü; ǖ'
     - 'xform ü/ ǘ'
-    - 'xform ü[<,] ǚ'
-    - 'xform ü[>\\] ǜ'
+    - 'xform ü, ǚ'
+    - 'xform ü\. ǜ'
   comment_format:
-    - xform ([aeiou])(ng?|r)([1234]) $1$3$2
-    - xform ([aeo])([iuo])([1234]) $1$3$2
-    - xform a1 ā
-    - xform a2 á
-    - xform a3 ǎ
-    - xform a4 à
-    - xform e1 ē
-    - xform e2 é
-    - xform e3 ě
-    - xform e4 è
-    - xform o1 ō
-    - xform o2 ó
-    - xform o3 ǒ
-    - xform o4 ò
-    - xform i1 ī
-    - xform i2 í
-    - xform i3 ǐ
-    - xform i4 ì
-    - xform u1 ū
-    - xform u2 ú
-    - xform u3 ǔ
-    - xform u4 ù
-    - xform v1 ǖ
-    - xform v2 ǘ
-    - xform v3 ǚ
-    - xform v4 ǜ
-    - xform/([nljqxy])v/$1ü/
-    - xform/eh[0-5]?/ê/
-    - xform/([a-z]+)[0-5]/$1/
+    - xform zhi ㄓ
+    - xform chi ㄔ
+    - xform shi ㄕ
+    - xform ri ㄖ
+    - xform zi ㄗ
+    - xform ci ㄘ
+    - xform si ㄙ
+    - xform zh ㄓ
+    - xform ch ㄔ
+    - xform sh ㄕ
+    - xform er ㄦ
+    - xform ruan ㄖㄨㄢ
+    - xform rua ㄖㄨㄚ
+    - xform run ㄖㄨㄣ
+    - xform rong ㄖㄨㄥ
+    - xform rang ㄖㄤ
+    - xform reng ㄖㄥ
+    - xform ruo ㄖㄨㄛ
+    - xform rui ㄖㄨㄟ
+    - xform ran ㄖㄢ
+    - xform ren ㄖㄣ
+    - xform rou ㄖㄡ
+    - xform rao ㄖㄠ
+    - xform ru ㄖㄨ
+    - xform re ㄖㄜ
+    - xform ying ㄧㄥ
+    - xform wang ㄨㄤ
+    - xform uang ㄨㄤ
+    - xform yang ㄧㄤ
+    - xform iang ㄧㄤ
+    - xform yong ㄩㄥ
+    - xform iong ㄩㄥ
+    - xform weng ㄨㄥ
+    - xform wo ㄨㄛ
+    - xform yun ㄩㄣ
+    - xform yue ㄩㄝ
+    - xform yuan ㄩㄢ
+    - xform you ㄧㄡ
+    - xform ye ㄧㄝ
+    - xform yao ㄧㄠ
+    - xform yin ㄧㄣ
+    - xform yan ㄧㄢ
+    - xform wan ㄨㄢ
+    - xform wai ㄨㄞ
+    - xform wei ㄨㄟ
+    - xform wen ㄨㄣ
+    - xform wa ㄨㄚ
+    - xform wu ㄨ
+    - xform yi ㄧ
+    - xform yu ㄩ
+    - xform un ㄨㄣ
+    - xform ui ㄨㄟ
+    - xform ju ㄐㄩ
+    - xform xu ㄒㄩ
+    - xform qu ㄑㄩ
+    - xform ve ㄩㄝ
+    - xform ing ㄧㄥ
+    - xform ong ㄨㄥ
+    - xform ang ㄤ
+    - xform eng ㄥ
+    - xform ai ㄞ
+    - xform ei ㄟ
+    - xform ao ㄠ
+    - xform ou ㄡ
+    - xform ian ㄧㄢ
+    - xform ya ㄧㄚ
+    - xform in ㄧㄣ
+    - xform an ㄢ
+    - xform en ㄣ
+    - xform r ㄦ
+    - xform v ㄩ
+    - xform b ㄅ
+    - xform p ㄆ
+    - xform m ㄇ
+    - xform f ㄈ
+    - xform d ㄉ
+    - xform t ㄊ
+    - xform n ㄋ
+    - xform l ㄌ
+    - xform g ㄍ
+    - xform k ㄎ
+    - xform h ㄏ
+    - xform j ㄐ
+    - xform q ㄑ
+    - xform x ㄒ
+    - xform z ㄗ
+    - xform c ㄘ
+    - xform s ㄙ
+    - xform u ㄨ
+    - xform e ㄜ
+    - xform o ㄛ
+    - xform a ㄚ
+    - xform i ㄧ
+    - xform/1//
+    - xform 2 ˊ
+    - xform 3 ˇ
+    - xform 4 ˋ
+    - xform 5 ˙
+    - xform/ //
 
 reverse_lookup:
   dictionary: stroke
@@ -205,8 +279,28 @@ punctuator:
 
 key_binder:
   import_preset: default
+  bindings:
+    - {accept: "Control+Shift+f", toggle: zh_simp, when: always}
+    - {accept: "Control+Shift+F", toggle: zh_simp, when: always}
+    - {accept: "Control+Shift+t", toggle: zh_tw, when: always}
+    - {accept: "Control+Shift+T", toggle: zh_tw, when: always}
 
 recognizer:
   import_preset: default
   patterns:
+    email: "^[a-z][-_.0-9a-z]*@.*$"
+    uppercase: "^[A-Z][-_+.'0-9A-Za-z]*$"
+    url: "^(www[.]|https?:|ftp:|mailto:).*$"
     reverse_lookup: "`[a-z]*'?$"
+    punct: ^/[0-9]?[a-z]*$
+
+zh_simp:
+  option_name: zh_simp
+  opencc_config: t2s.json
+  tips: none
+
+zh_tw:
+  option_name: zh_tw
+  opencc_config: t2tw.json
+  tips: none
+
