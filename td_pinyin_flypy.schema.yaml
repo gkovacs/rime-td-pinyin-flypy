@@ -49,10 +49,8 @@ engine:
     - fallback_segmentor
   translators:
     - punct_translator
-    - reverse_lookup_translator
     - script_translator
   filters:
-    #- reverse_lookup_filter
     - simplifier@zh_simp
     - simplifier@zh_tw
     - uniquifier
