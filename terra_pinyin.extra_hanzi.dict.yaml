@@ -1,0 +1,38 @@
+# Rime dictionary
+# encoding: utf-8
+#
+# 「Rime词库扩展计划」——为RIME打造一个强大好用的词库
+---
+name: terra_pinyin.extra_hanzi
+version: "20150901"
+sort: by_weight
+use_preset_vocabulary: true
+...
+鮖	shi2
+笹	ti1
+鮗	dong1
+莵	tu4
+錺	fang1
+乨	shi3
+咜	tuo1
+珱	ying1
+膤	xue3
+凪	zhi3
+陦	dao3
+鴫	tian2
+嵜	qi2
+杣	mian2
+枩	song1
+曻	sheng1
+墶	da2
+閖	shui3
+籏	qi2
+彅	jian3
+疂	die2
+鞆	bing3
+氺	shui3
+鞐	qia3
+殱	jian1
+墸	zhu4
+𠮶	ge4
+𠮶	ga4

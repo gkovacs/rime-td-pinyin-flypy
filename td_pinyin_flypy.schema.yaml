@@ -12,8 +12,7 @@ schema:
   description: |
     地球拼音＋小鶴雙拼方案。
   dependencies:
-    - stroke
-    - terra_pinyin
+    - terra_pinyin.extended
 
 switches:
   - name: ascii_mode
@@ -98,7 +97,7 @@ speller:
     - 'xlit 1234 ;/,.'
 
 translator:
-  dictionary: terra_pinyin
+  dictionary: terra_pinyin.extended
   spelling_hints: 5 # ～字以內候選標註完整帶調拼音
   prism: td_pinyin_flypy
   preedit_format:
@@ -263,17 +262,6 @@ translator:
     - xform 5 ˙
     - xform/ //
 
-reverse_lookup:
-  dictionary: stroke
-  enable_completion: true
-  prefix: "`"
-  suffix: "'"
-  tips: 〔筆畫〕
-  preedit_format:
-    - xlit/hspnz/一丨丿丶乙/
-  comment_format:
-    - xform/([nl])v/$1ü/
-
 punctuator:
   import_preset: default
 
@@ -291,7 +279,6 @@ recognizer:
     email: "^[a-z][-_.0-9a-z]*@.*$"
     uppercase: "^[A-Z][-_+.'0-9A-Za-z]*$"
     url: "^(www[.]|https?:|ftp:|mailto:).*$"
-    reverse_lookup: "`[a-z]*'?$"
     punct: ^/[0-9]?[a-z]*$
 
 zh_simp:
