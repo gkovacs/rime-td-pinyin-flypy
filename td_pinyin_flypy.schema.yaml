@@ -273,8 +273,8 @@ ascii_composer:
     Shift_R: noop
 
 key_binder:
-  #import_preset: default
   bindings:
+    - {accept: "Control+Shift+1", select: .next, when: always}
     - {accept: "Control+Shift+f", toggle: zh_simp, when: always}
     - {accept: "Control+Shift+F", toggle: zh_simp, when: always}
     - {accept: "Control+Shift+t", toggle: zh_tw, when: always}
