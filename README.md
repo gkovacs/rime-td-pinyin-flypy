@@ -29,7 +29,7 @@ Finally edit `default.custom.yaml` and add `td_pinyin_flypy` to the schema list:
 ```bash
 patch:
   schema_list:
-    - schema: international
+    - schema: td_pinyin_flypy
 ```
 
 Now reload RIME and it should appear under your layouts.
