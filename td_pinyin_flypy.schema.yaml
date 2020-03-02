@@ -94,6 +94,10 @@ speller:
     - derive/^([a-z]+)[0-5]$/$1/
     - 'xlit 1234 ;/,.'
 
+menu:
+  alternative_select_keys: "123456789"
+  page_size: 9
+
 translator:
   dictionary: terra_pinyin.extended
   spelling_hints: 5 # ～字以內候選標註完整帶調拼音
@@ -263,8 +267,13 @@ translator:
 punctuator:
   import_preset: default
 
+ascii_composer:
+  switch_key:
+    Shift_L: noop
+    Shift_R: noop
+
 key_binder:
-  import_preset: default
+  #import_preset: default
   bindings:
     - {accept: "Control+Shift+f", toggle: zh_simp, when: always}
     - {accept: "Control+Shift+F", toggle: zh_simp, when: always}
