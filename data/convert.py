@@ -1,5 +1,7 @@
 import opencc
 
+converter = opencc.OpenCC('t2s.json')
+
 char_to_cangjie = {}
 seen_start = False
 for line in open('cangjie5.dict.yaml'):
@@ -81,7 +83,7 @@ outfile = open('../terra_pinyin.cangjie5.dict.yaml', 'wt')
 print(header_text, file=outfile)
 num_lines = 0
 seen_start = False
-for line in open('../terra_pinyin.dict.yaml'):
+for line in open('./terra_pinyin_fixed.dict.yaml'):
   line = line.strip()
   if not seen_start:
     if line == '...':
@@ -97,7 +99,7 @@ for line in open('../terra_pinyin.dict.yaml'):
     continue
   #chars_orig_simp = chars_orig
   #chars_simp = chars
-  chars_orig_simp = opencc.convert(chars_orig, config='t2s.json')
+  chars_orig_simp = converter.convert(chars_orig)
   chars_simp = chars_orig_simp.replace('·', '')
   cangjie_combo_list = get_all_cangjie_combo_list(chars)
   cangjie_simp_combo_list = get_all_cangjie_combo_list(chars_simp)
