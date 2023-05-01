@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 schema:
-  schema_id: td_pinyin_flypy
+  schema_id: td_pinyin_flypy_allowcap
   name: 帶調小鶴雙拼
   version: "0.1"
   author:
@@ -107,7 +107,7 @@ translator:
   dictionary: terra_pinyin.extended
   #dictionary: terra_pinyin
   spelling_hints: 5 # ～字以內候選標註完整帶調拼音
-  prism: td_pinyin_flypy
+  prism: td_pinyin_flypy_allowcap
   preedit_format:
     - xform/([bpmfdtnljqx])n/$1iao/
     - xform/(\w)g/$1eng/
@@ -169,6 +169,32 @@ translator:
     - 'xform ü/ ǘ'
     - 'xform ü, ǚ'
     - 'xform ü\. ǜ'
+    - xform/^a/A/
+    - xform/^b/B/
+    - xform/^c/C/
+    - xform/^d/D/
+    - xform/^e/E/
+    - xform/^f/F/
+    - xform/^g/G/
+    - xform/^h/H/
+    - xform/^i/I/
+    - xform/^j/J/
+    - xform/^k/K/
+    - xform/^l/L/
+    - xform/^m/M/
+    - xform/^n/N/
+    - xform/^o/O/
+    - xform/^p/P/
+    - xform/^q/Q/
+    - xform/^r/R/
+    - xform/^s/S/
+    - xform/^t/T/
+    - xform/^u/U/
+    - xform/^v/V/
+    - xform/^w/W/
+    - xform/^x/X/
+    - xform/^y/Y/
+    - xform/^z/Z/
   comment_format:
     - xform zhi ㄓ
     - xform chi ㄔ
