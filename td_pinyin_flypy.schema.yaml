@@ -281,7 +281,6 @@ key_binder:
     - {accept: "Control+Shift+T", toggle: zh_tw, when: always}
 
 recognizer:
-  import_preset: default
   patterns:
     email: "^[a-z][-_.0-9a-z]*@.*$"
     uppercase: "^[A-Z][-_+.'0-9A-Za-z]*$"
